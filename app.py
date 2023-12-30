@@ -91,4 +91,10 @@ if st.button("Search"):
     search_results = search_jobs(query, cosine_sim, data)
     st.write("Search Results:")
     for result in search_results:
-        st.write(result)
+        # Menampilkan hasil dalam bentuk kartu
+        st.write(f"**Job Title:** {result['Job Title']}")
+        st.write(f"**Location:** {result['Location']}")
+        st.write(f"**Salary Currency:** {result['Salary Currency']}")
+        # Tambahkan informasi lainnya sesuai kebutuhan
+        st.write(f"**Similarity Score:** {result['Similarity Score']}")
+        st.write("---")  # Pemisah antara kartu-kartu
