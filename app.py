@@ -1,17 +1,14 @@
-from flask import Flask, request, jsonify
+import streamlit as st
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 import nltk
-import os
 
 # Download stopwords
 nltk.download('punkt')
 nltk.download('stopwords')
-
-app = Flask(__name__)
 
 # Load dataset
 data = pd.read_csv('./test.csv', delimiter='|')
@@ -87,29 +84,11 @@ def search_jobs(query, cosine_sim, data):
 
     return results
 
-
-# Endpoint untuk pencarian pekerjaan
-@app.route('/search', methods=['POST'])
-def search_endpoint():
-    try:
-        # Menerima data JSON dari POST request
-        request_data = request.get_json()
-
-        # Ambil nilai query dari data JSON
-        query = request_data.get('query', '')
-
-        # Lakukan pencarian
-        search_results = search_jobs(query, cosine_sim, data)
-
-        # Kirim respons dalam bentuk JSON
-        if not search_results:
-            return jsonify({'message': 'No results found for the given query.'}), 404
-        else:
-            return jsonify({'results': search_results})
-    except Exception as e:
-        return jsonify({'message': f'An error occurred: {str(e)}'}), 500
-
-if __name__ == "__main__":
-    # Use the PORT environment variable if available, or default to 8080
-    port = int(os.environ.get("PORT", 60))
-    app.run(host="0.0.0.0", port=port)
+# Streamlit UI
+st.title("Job Search App")
+query = st.text_input("Enter your job search query:")
+if st.button("Search"):
+    search_results = search_jobs(query, cosine_sim, data)
+    st.write("Search Results:")
+    for result in search_results:
+        st.write(result)
