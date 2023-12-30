@@ -95,6 +95,14 @@ if st.button("Search"):
         st.write(f"**Job Title:** {result['Job Title']}")
         st.write(f"**Location:** {result['Location']}")
         st.write(f"**Salary Currency:** {result['Salary Currency']}")
-        # Tambahkan informasi lainnya sesuai kebutuhan
-        st.write(f"**Similarity Score:** {result['Similarity Score']}")
+        st.write(f"**Career Level:** {result['Career Level']}")
+        st.write(f"**Experience Level:** {result['Experience Level']}")
+        st.write(f"**Education Level:** {result['Education Level']}")
+        st.write(f"**Employment Type:** {result['Employment Type']}")
+        st.write(f"**Job Function:** {result['Job Function']}")
+        st.write(f"**Job Benefits:** {result['Job Benefits']}")
+        st.write(f"**Company Size:** {result['Company Size']}")
+        st.write(f"**Company Industry:** {result['Company Industry']}")
+        st.write(f"**Job Description:** {result['Job Description']}")
+        st.write(f"**Salary:** {result['Salary']}")
         st.write("---")  # Pemisah antara kartu-kartu
